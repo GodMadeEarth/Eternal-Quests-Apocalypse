@@ -1,0 +1,130 @@
+[gd_scene load_steps=7 format=3 uid="uid://hd5ooj6le31s"]
+
+[ext_resource type="Script" path="res://entity.gd" id="1_ad8m1"]
+[ext_resource type="Script" path="res://addons/godot-traits/core/container/gtraits_container.gd" id="2_0ojmx"]
+[ext_resource type="Script" path="res://system.gd" id="2_hctg5"]
+[ext_resource type="Script" path="res://Trait.gd" id="3_014oa"]
+[ext_resource type="Script" path="res://time_system.gd" id="5_by2lo"]
+[ext_resource type="Script" path="res://tag.gd" id="6_iqmqh"]
+
+[node name="World" type="Node2D"]
+
+[node name="Entity" type="Node2D" parent="."]
+script = ExtResource("1_ad8m1")
+
+[node name="GTraitsContainer" type="Node" parent="Entity"]
+script = ExtResource("2_0ojmx")
+
+[node name="Trait" type="Node" parent="Entity/GTraitsContainer"]
+script = ExtResource("3_014oa")
+
+[node name="System" type="Node2D" parent="."]
+script = ExtResource("2_hctg5")
+
+[node name="Break Time UI" type="CanvasLayer" parent="."]
+
+[node name="Time System" type="Node" parent="Break Time UI"]
+script = ExtResource("5_by2lo")
+
+[node name="Timer" type="Control" parent="Break Time UI" groups=["Entities"]]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 256.0
+offset_bottom = 128.0
+
+[node name="Minutes Label" type="Label" parent="Break Time UI/Timer"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -96.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(112, 96)
+theme_override_font_sizes/font_size = 64
+text = "00:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Seconds Label" type="Label" parent="Break Time UI/Timer"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -96.0
+offset_right = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 96)
+theme_override_font_sizes/font_size = 64
+text = ":00"
+vertical_alignment = 1
+
+[node name="Miliseconds Label" type="Label" parent="Break Time UI/Timer"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = -64.0
+offset_right = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-48, 64)
+theme_override_font_sizes/font_size = 32
+text = ".00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tag" type="Node" parent="Break Time UI/Timer"]
+script = ExtResource("6_iqmqh")
+tag = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Break Time UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 48.0
+offset_right = 171.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Pause Button" type="Button" parent="Break Time UI/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Pause"
+flat = true
+
+[node name="Skip Button" type="Button" parent="Break Time UI/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Skip"
+flat = true
+
+[node name="Play Button" type="Button" parent="Break Time UI/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Play"
+flat = true
+
+[node name="Play Time UI" type="CanvasLayer" parent="."]
