@@ -1,7 +1,7 @@
 extends System
 
 func _physics_process(delta: float) -> void:
-	for entity in get_tree().get_nodes_in_group("Entities"):
+	for entity in query():
 		if Tag.has_tag(Tag.Tags.TIMER,entity):
 			execute(entity)
 

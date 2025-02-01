@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hd5ooj6le31s"]
+[gd_scene load_steps=10 format=3 uid="uid://hd5ooj6le31s"]
 
 [ext_resource type="Script" path="res://entity.gd" id="1_ad8m1"]
 [ext_resource type="Script" path="res://addons/godot-traits/core/container/gtraits_container.gd" id="2_0ojmx"]
@@ -6,6 +6,11 @@
 [ext_resource type="Script" path="res://Trait.gd" id="3_014oa"]
 [ext_resource type="Script" path="res://time_system.gd" id="5_by2lo"]
 [ext_resource type="Script" path="res://tag.gd" id="6_iqmqh"]
+[ext_resource type="Script" path="res://button_trait.gd" id="6_o85bn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0gmw2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vmw8h"]
 
 [node name="World" type="Node2D"]
 
@@ -18,25 +23,46 @@ script = ExtResource("2_0ojmx")
 [node name="Trait" type="Node" parent="Entity/GTraitsContainer"]
 script = ExtResource("3_014oa")
 
-[node name="System" type="Node2D" parent="."]
+[node name="System" type="Node" parent="."]
 script = ExtResource("2_hctg5")
+
+[node name="Main Menu UI" type="CanvasLayer" parent="."]
 
 [node name="Break Time UI" type="CanvasLayer" parent="."]
 
 [node name="Time System" type="Node" parent="Break Time UI"]
 script = ExtResource("5_by2lo")
 
-[node name="Timer" type="Control" parent="Break Time UI" groups=["Entities"]]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 256.0
-offset_top = 128.0
-offset_right = 256.0
-offset_bottom = 128.0
+[node name="Start Entity" type="Node2D" parent="Break Time UI"]
+script = ExtResource("1_ad8m1")
 
-[node name="Minutes Label" type="Label" parent="Break Time UI/Timer"]
+[node name="Button" type="Button" parent="Break Time UI/Start Entity"]
 texture_filter = 1
-layout_mode = 1
+offset_left = 192.0
+offset_top = 88.0
+offset_right = 320.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0gmw2")
+text = "Start?"
+flat = true
+metadata/_edit_group_ = true
+
+[node name="GTraitsContainer" type="Node" parent="Break Time UI/Start Entity"]
+script = ExtResource("2_0ojmx")
+
+[node name="ButtonTrait" type="Node" parent="Break Time UI/Start Entity/GTraitsContainer"]
+script = ExtResource("6_o85bn")
+
+[node name="WorkTimer Entity" type="Node2D" parent="Break Time UI"]
+position = Vector2(256, 104)
+script = ExtResource("1_ad8m1")
+
+[node name="GTraitsContainer" type="Node" parent="Break Time UI/WorkTimer Entity"]
+script = ExtResource("2_0ojmx")
+
+[node name="Minutes Label" type="Label" parent="Break Time UI/WorkTimer Entity"]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -53,9 +79,8 @@ text = "00:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Seconds Label" type="Label" parent="Break Time UI/Timer"]
+[node name="Seconds Label" type="Label" parent="Break Time UI/WorkTimer Entity"]
 texture_filter = 1
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -71,41 +96,65 @@ theme_override_font_sizes/font_size = 64
 text = ":00"
 vertical_alignment = 1
 
-[node name="Tag" type="Node" parent="Break Time UI/Timer"]
+[node name="Tag" type="Node" parent="Break Time UI/WorkTimer Entity"]
 script = ExtResource("6_iqmqh")
 tag = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Break Time UI"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="Pause Entity" type="Node2D" parent="Break Time UI"]
+position = Vector2(512, 256)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ad8m1")
+
+[node name="Button" type="Button" parent="Break Time UI/Pause Entity"]
 offset_left = -160.0
-offset_top = 48.0
-offset_right = 171.0
-offset_bottom = 112.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Pause Button" type="Button" parent="Break Time UI/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Pause"
+offset_top = -80.0
+offset_right = -96.0
+offset_bottom = -16.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vmw8h")
 flat = true
+metadata/_edit_group_ = true
 
-[node name="Skip Button" type="Button" parent="Break Time UI/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Skip"
-flat = true
+[node name="Polygon2D" type="Polygon2D" parent="Break Time UI/Pause Entity/Button"]
+position = Vector2(-248, -192)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(248, 192, 248, 256, 272, 256, 272, 192)
 
-[node name="Play Button" type="Button" parent="Break Time UI/HBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Play"
+[node name="Polygon2D2" type="Polygon2D" parent="Break Time UI/Pause Entity/Button"]
+position = Vector2(-216, -192)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(256, 192, 256, 256, 280, 256, 280, 192)
+
+[node name="GTraitsContainer" type="Node" parent="Break Time UI/Pause Entity"]
+script = ExtResource("2_0ojmx")
+
+[node name="ButtonTrait" type="Node" parent="Break Time UI/Pause Entity/GTraitsContainer"]
+script = ExtResource("6_o85bn")
+
+[node name="Play Entity" type="Node2D" parent="Break Time UI"]
+position = Vector2(512, 256)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ad8m1")
+
+[node name="Button" type="Button" parent="Break Time UI/Play Entity"]
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -16.0
+offset_bottom = -16.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0gmw2")
 flat = true
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="Break Time UI/Play Entity/Button"]
+position = Vector2(-248, -192)
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(248, 192, 248, 256, 312, 224)
+
+[node name="GTraitsContainer" type="Node" parent="Break Time UI/Play Entity"]
+script = ExtResource("2_0ojmx")
+
+[node name="ButtonTrait" type="Node" parent="Break Time UI/Play Entity/GTraitsContainer"]
+script = ExtResource("6_o85bn")
 
 [node name="Play Time UI" type="CanvasLayer" parent="."]
+
+[node name="Setting UI" type="CanvasLayer" parent="."]

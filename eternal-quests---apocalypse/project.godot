@@ -23,7 +23,6 @@ GTraitsRegistry="*res://gtraits/helper/gtraits_registry.gd"
 window/size/viewport_width=512
 window/size/viewport_height=256
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
