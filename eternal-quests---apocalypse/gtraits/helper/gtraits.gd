@@ -132,3 +132,4 @@ static func if_is_button_trait_or_else(object:Object, if_callable:Callable, else
 	return if_is_a_or_else(ButtonTrait, object, if_callable, else_callable, deferred_call)
 
 #endregion
+

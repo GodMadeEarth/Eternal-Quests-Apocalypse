@@ -5,8 +5,11 @@ extends Node
 
 enum Tags{
 	NULL,
+	UI,
 	TIMER,
-	BUTTON
+	PLAY,
+	PAUSE,
+	START
 }
 
 static func has_tag(tag:Tags,object:Node):

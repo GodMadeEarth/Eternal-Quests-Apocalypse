@@ -62,7 +62,7 @@ class_name Damageable
 extends Node
 
 func take_damage(damage:int) -> void:
-    pass
+	pass
 ```
 
 _And voilà !_ Your first trait is created. Traits can any class, regardless of the level of class nesting. This includes both the _top-level_ class (declared using the `class_name` keyword) and any _nested_ class (declared using the `class` keyword).
@@ -78,13 +78,13 @@ class_name Traits
 
 class SomeClass:
 
-    # @trait
-    class Damageable:
-        pass
+	# @trait
+	class Damageable:
+		pass
 
-    # @trait(alias=Killable)
-    class Killable:
-        pass
+	# @trait(alias=Killable)
+	class Killable:
+		pass
 
 # Damageable trait will be usable through Traits.SomeClass.Damageable reference
 # Killable trait will be usable through Killable reference due to alias declaration
@@ -117,7 +117,7 @@ Through this utility script, manipulating traits becomes easy and straightforwar
 class_name Damageable
 
 func take_damage(damage:int) -> void:
-    pass
+	pass
 
 #####
 # File world.gd
@@ -130,25 +130,25 @@ extends Node2D
 # #####
 
 func _ready() -> void:
-    var crate:Node2D = preload("crate.tscn").instantiate()
-    add_child(crate)
-    GTraits.set_damageable(crate)
-    crate.on_hit.connect(_on_crate_hit)
+	var crate:Node2D = preload("crate.tscn").instantiate()
+	add_child(crate)
+	GTraits.set_damageable(crate)
+	crate.on_hit.connect(_on_crate_hit)
 
 func _on_crate_hit() -> void:
-    var crate:Node2D = get_node("crate")
-    if GTraits.is_damageable(crate):
-        GTraits.as_damageable(crate).take_damage(10)
-    # Can also be rewrite as follow
-    GTraits.if_is_damageable(crate, func(obj:Damageable): obj.take_damage(10))
-    # Can also be rewrite as follow
-    GTraits.if_is_damageable_or_else(
-        crate, 
-        func(obj:Damageable): obj.take_damage(10),
-        func(): print("I'm invicible!")
-    )
-    # Finally, can unset damageable trait
-    GTraits.unset_damageable(crate)
+	var crate:Node2D = get_node("crate")
+	if GTraits.is_damageable(crate):
+		GTraits.as_damageable(crate).take_damage(10)
+	# Can also be rewrite as follow
+	GTraits.if_is_damageable(crate, func(obj:Damageable): obj.take_damage(10))
+	# Can also be rewrite as follow
+	GTraits.if_is_damageable_or_else(
+		crate, 
+		func(obj:Damageable): obj.take_damage(10),
+		func(): print("I'm invicible!")
+	)
+	# Finally, can unset damageable trait
+	GTraits.unset_damageable(crate)
 ```
 
 _Godot Traits_ generation tool can also generate helper methods for _nested_ trait classes. As _nested_ class names may not be unique across the project and to prevent generating the same helper method twice, the generation tool utilizes the trait's _parent classes_ as context to create a unique helper name.
@@ -162,13 +162,13 @@ class_name Traits
 
 class SomeClass:
 
-    # @trait
-    class Damageable:
-        pass
+	# @trait
+	class Damageable:
+		pass
 
 # @trait
 class Killable:
-    pass
+	pass
 
 # Will automatically generates helpers methods:
 # set_traits_some_class_damageable, is_traits_some_class_damageable, as_traits_some_class_damageable, unset_traits_some_class_damageable, if_is_traits_some_class_damageable, if_is_traits_some_class_damageable_or_else
@@ -186,15 +186,15 @@ _Godot Traits_ generation tool honors the _alias_ trait annotation parameter by 
 class_name Damageable
 
 func take_damage(damage:int) -> void:
-    print("Take %s damages!" % _compute_damage(damage))
+	print("Take %s damages!" % _compute_damage(damage))
 
 func _compute_damage(initial_damage:int) -> int:
-    return initial_damage
+	return initial_damage
 
 # @trait(alias=CriticalDamageable)
 class CriticalDamageable extends Damageable:
-    func _compute_damage(initial_damage:int) -> int:
-        return initial_damage * 2
+	func _compute_damage(initial_damage:int) -> int:
+		return initial_damage * 2
 
 # Will automatically generates helpers methods:
 # set_critical_damageable, is_critical_damageable, as_critical_damageable, unset_critical_damageable, if_is_critical_damageable, if_is_critical_damageable_or_else
@@ -273,15 +273,15 @@ var _receiver
 var _logger:Loggable
 
 func _initialize(receiver, logger: Loggable) -> void:
-    _receiver = receiver
-    _logger = logger
+	_receiver = receiver
+	_logger = logger
 
 func _on_self_desctruct_timer_timeout() -> void:
-    _explosion_particules.emitting = true
-    get_tree().create_tween().tween_property(_receiver, "modulate:a", 0, _self_desctruct_timer.wait_time / 2)
+	_explosion_particules.emitting = true
+	get_tree().create_tween().tween_property(_receiver, "modulate:a", 0, _self_desctruct_timer.wait_time / 2)
 
 func _on_explosion_particules_finished() -> void:
-    after_destruction.emit()
+	after_destruction.emit()
 
 
 #####
@@ -293,8 +293,8 @@ extends Node2D
 @onready var _heart: Polygon2D = $Heart
 
 func _ready() -> void:
-    GTraits.set_self_destructible(_heart) \
-        .after_destruction.connect(func(): _heart.queue_free())
+	GTraits.set_self_destructible(_heart) \
+		.after_destruction.connect(func(): _heart.queue_free())
 ```
 
 Take note of the usage of the `_initialize` function in the self-destructible trait. This method is recognized by _Godot Traits_ and is automatically invoked after the instantiation of a scene trait to execute dependency injection. The `_init` function in _Godot_ cannot be utilized for dependency injection in scene traits as it cannot accept any arguments.
@@ -327,9 +327,9 @@ _Godot Traits_ provides helpers to retrieve object traits with robust checks: if
 extends Node2D
 
 func _ready() -> void:
-    var npc = preload("npc.gd").new()
-    GTraits.set_killable(npc) # Out NPC can now be killed !
-    GTraits.as_moveable(npc).move(Vector2.RIGHT) # Will raise an exception since the NPC is not Moveable !
+	var npc = preload("npc.gd").new()
+	GTraits.set_killable(npc) # Out NPC can now be killed !
+	GTraits.as_moveable(npc).move(Vector2.RIGHT) # Will raise an exception since the NPC is not Moveable !
 ```
 
 ![image](addons/godot-traits/documentation/assets/gtraits_assertion_error_not_moveable.png)
@@ -347,9 +347,9 @@ class_name Crate
 extends Node2D
 
 func _init() -> void:
-    # Add Damageable trait to this crate
-    # This allows to call take_damage on this crate right after its creation
-    GTraits.set_damageable(self)
+	# Add Damageable trait to this crate
+	# This allows to call take_damage on this crate right after its creation
+	GTraits.set_damageable(self)
 
 
 #####
@@ -361,18 +361,18 @@ extends Node2D
 func _ellapsed_time:float
 
 func _process(delta:float) -> void:
-    _ellapsed_time += delta
+	_ellapsed_time += delta
 
-    var crate = get_node("crate")
+	var crate = get_node("crate")
 
-    # Is always safe since we check if the trait is still available on the crate. No 
-    # needs maintain an internal crate state saying it's invicible or not
-    if GTraits.is_damageable(crate):
-        GTraits.as_damageable(crate).take_damage(1)
-    
-    # Make the crate invicible after 10 seconds: it will no longer take damages
-    if _ellapsed_time >= 10:
-        GTraits.unset_damageable(crate)
+	# Is always safe since we check if the trait is still available on the crate. No 
+	# needs maintain an internal crate state saying it's invicible or not
+	if GTraits.is_damageable(crate):
+		GTraits.as_damageable(crate).take_damage(1)
+	
+	# Make the crate invicible after 10 seconds: it will no longer take damages
+	if _ellapsed_time >= 10:
+		GTraits.unset_damageable(crate)
 ```
 
 #### 🔑 Automatic trait dependencies injection
@@ -394,10 +394,10 @@ var _receiver
 # This trait needs a context to work (an object to remove health from)
 # Since there is no asked type, it will be the trait receiver
 func _init(the_receiver) -> void:
-    _receiver = the_receiver
+	_receiver = the_receiver
 
 func take_damage(damage:int) -> void:
-    _receiver.health -= damage
+	_receiver.health -= damage
 
 #####
 # File world.gd
@@ -405,9 +405,9 @@ func take_damage(damage:int) -> void:
 extends Node2D
 
 func _init() -> void:
-    var crate:Node2D = preload("crate.tscn").instantiate()
-    # This will automatically make the crate to be the receiver of the Damageable trait that is beeing added
-    GTraits.set_damageable(crate)
+	var crate:Node2D = preload("crate.tscn").instantiate()
+	# This will automatically make the crate to be the receiver of the Damageable trait that is beeing added
+	GTraits.set_damageable(crate)
 ```
 
 If the trait constructor requests an object of a different type than the _receiver_ type, then _Godot Traits_ will examine the _receiver_ to locate a trait with that type and inject it into the trait constructor.
@@ -429,12 +429,12 @@ var _loggable:Loggable
 # If the receiver does not have the required traits, they are automatically instantiated, registered into
 # the receiver and injected into this trait.
 func _init(the_healthable:Healthable, the_loggable:Loggable) -> void:
-    _healthable = the_healthable
-    _loggable = the_loggable
+	_healthable = the_healthable
+	_loggable = the_loggable
 
 func take_damage(damage:int) -> void:
-    _healthable.health -= damage
-    _loggable.log("Took %d damage!" % damage)
+	_healthable.health -= damage
+	_loggable.log("Took %d damage!" % damage)
 
 #####
 # File world.gd
@@ -442,14 +442,14 @@ func take_damage(damage:int) -> void:
 extends Node2D
 
 func _init() -> void:
-    var crate:Node2D = preload("crate.tscn").instantiate()
-    # Only the Damageable trait is set initially
-    # Now, when the Damageable trait is constructed, it automatically declares, creates,
-    # and injects the required Healthable and Loggable traits into the crate
-    GTraits.set_damageable(crate)
-    assert(GTraits.is_damageable(crate), "It is Damageable !")
-    assert(GTraits.is_loggable(crate), "It is Loggable too !")
-    assert(GTraits.is_healthable(crate), "It is Healthable too !")
+	var crate:Node2D = preload("crate.tscn").instantiate()
+	# Only the Damageable trait is set initially
+	# Now, when the Damageable trait is constructed, it automatically declares, creates,
+	# and injects the required Healthable and Loggable traits into the crate
+	GTraits.set_damageable(crate)
+	assert(GTraits.is_damageable(crate), "It is Damageable !")
+	assert(GTraits.is_loggable(crate), "It is Loggable too !")
+	assert(GTraits.is_healthable(crate), "It is Healthable too !")
 ```
 
 ##### 📜 Automatic trait dependencies injection rules
@@ -482,11 +482,11 @@ _Godot Traits_ addresses this seamlessly! If a trait has been specialized and ad
 class_name Damageable
 
 func take_damage(damage:float) -> void:
-    var applied_damages:float = _compute_damages(damage)
-    print("Damages : %s" % applied_damages)
+	var applied_damages:float = _compute_damages(damage)
+	print("Damages : %s" % applied_damages)
 
 func _compute_damages(initial_damage:float) -> float:
-    return initial_damage
+	return initial_damage
 
 #####
 # File critical_damageable.gd
@@ -497,7 +497,7 @@ class_name CriticalDamageable
 extends Damageable
 
 func _compute_damages(initial_damage:float) -> float:
-    return initial_damage * 2
+	return initial_damage * 2
 
 #####
 # File crate.gd
@@ -507,8 +507,8 @@ class_name Crate
 extends Node2D
 
 func _init() -> void:
-    # This crate will only takes critical damages !
-    GTraits.set_critical_damageable(self)
+	# This crate will only takes critical damages !
+	GTraits.set_critical_damageable(self)
 
 #####
 # File world.gd
@@ -517,12 +517,12 @@ func _init() -> void:
 extends Node2D
 
 func _ready_() -> void:
-    var crate = preload("crate.tscn").instantiate()
+	var crate = preload("crate.tscn").instantiate()
 
-    # We can access to the trait using it's real type, this will print 50 damages !
-    GTraits.as_critical_damageable(crate).take_damage(25)
-    # But we also can access to the trait using it's parent type, this will also print 50 damages since GTraits call the CriticalDamageable trait !
-    GTraits.as_damageable(crate).take_damage(25)
-    # This is always true !
-    assert(GTraits.as_critical_damageable(crate) == GTraits.as_damageable(crate))
+	# We can access to the trait using it's real type, this will print 50 damages !
+	GTraits.as_critical_damageable(crate).take_damage(25)
+	# But we also can access to the trait using it's parent type, this will also print 50 damages since GTraits call the CriticalDamageable trait !
+	GTraits.as_damageable(crate).take_damage(25)
+	# This is always true !
+	assert(GTraits.as_critical_damageable(crate) == GTraits.as_damageable(crate))
 ```

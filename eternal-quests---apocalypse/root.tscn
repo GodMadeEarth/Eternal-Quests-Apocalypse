@@ -54,6 +54,10 @@ script = ExtResource("2_0ojmx")
 [node name="ButtonTrait" type="Node" parent="Break Time UI/Start Entity/GTraitsContainer"]
 script = ExtResource("6_o85bn")
 
+[node name="Tag" type="Node" parent="Break Time UI/Start Entity"]
+script = ExtResource("6_iqmqh")
+tag = 5
+
 [node name="WorkTimer Entity" type="Node2D" parent="Break Time UI"]
 position = Vector2(256, 104)
 script = ExtResource("1_ad8m1")
@@ -98,17 +102,16 @@ vertical_alignment = 1
 
 [node name="Tag" type="Node" parent="Break Time UI/WorkTimer Entity"]
 script = ExtResource("6_iqmqh")
-tag = 1
+tag = 2
 
 [node name="Pause Entity" type="Node2D" parent="Break Time UI"]
 position = Vector2(512, 256)
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ad8m1")
 
 [node name="Button" type="Button" parent="Break Time UI/Pause Entity"]
-offset_left = -160.0
-offset_top = -80.0
-offset_right = -96.0
+offset_left = -96.0
+offset_top = -48.0
+offset_right = -64.0
 offset_bottom = -16.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vmw8h")
 flat = true
@@ -117,12 +120,12 @@ metadata/_edit_group_ = true
 [node name="Polygon2D" type="Polygon2D" parent="Break Time UI/Pause Entity/Button"]
 position = Vector2(-248, -192)
 color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(248, 192, 248, 256, 272, 256, 272, 192)
+polygon = PackedVector2Array(248, 192, 248, 224, 260, 224, 260, 192)
 
 [node name="Polygon2D2" type="Polygon2D" parent="Break Time UI/Pause Entity/Button"]
 position = Vector2(-216, -192)
 color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(256, 192, 256, 256, 280, 256, 280, 192)
+polygon = PackedVector2Array(236, 192, 236, 224, 248, 224, 248, 192)
 
 [node name="GTraitsContainer" type="Node" parent="Break Time UI/Pause Entity"]
 script = ExtResource("2_0ojmx")
@@ -130,14 +133,17 @@ script = ExtResource("2_0ojmx")
 [node name="ButtonTrait" type="Node" parent="Break Time UI/Pause Entity/GTraitsContainer"]
 script = ExtResource("6_o85bn")
 
+[node name="Tag" type="Node" parent="Break Time UI/Pause Entity"]
+script = ExtResource("6_iqmqh")
+tag = 4
+
 [node name="Play Entity" type="Node2D" parent="Break Time UI"]
 position = Vector2(512, 256)
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ad8m1")
 
 [node name="Button" type="Button" parent="Break Time UI/Play Entity"]
-offset_left = -80.0
-offset_top = -80.0
+offset_left = -48.0
+offset_top = -48.0
 offset_right = -16.0
 offset_bottom = -16.0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0gmw2")
@@ -147,13 +153,17 @@ metadata/_edit_group_ = true
 [node name="Polygon2D" type="Polygon2D" parent="Break Time UI/Play Entity/Button"]
 position = Vector2(-248, -192)
 color = Color(0, 1, 0, 1)
-polygon = PackedVector2Array(248, 192, 248, 256, 312, 224)
+polygon = PackedVector2Array(248, 192, 248, 224, 280, 208)
 
 [node name="GTraitsContainer" type="Node" parent="Break Time UI/Play Entity"]
 script = ExtResource("2_0ojmx")
 
 [node name="ButtonTrait" type="Node" parent="Break Time UI/Play Entity/GTraitsContainer"]
 script = ExtResource("6_o85bn")
+
+[node name="Tag" type="Node" parent="Break Time UI/Play Entity"]
+script = ExtResource("6_iqmqh")
+tag = 3
 
 [node name="Play Time UI" type="CanvasLayer" parent="."]
 
