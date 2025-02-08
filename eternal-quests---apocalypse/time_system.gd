@@ -1,8 +1,8 @@
 extends System
 
-var systemState:SystemState = SystemState.IDLE
+var systemState:States = States.IDLE
 
-enum SystemState{
+enum States{
 	IDLE,
 	PLAYING,
 	PAUSED,
@@ -13,36 +13,39 @@ var timer:SceneTreeTimer
 var pausedTime:float = 0.0
 
 func _physics_process(delta: float) -> void:
+	if not GameState.is_current_state(GameState.States.INACTIVE_STATE): return
+	
 	for entity in query():
 		execute(entity)
+	
+	if systemState == States.FINISHED:
+		GameState.set_current_state(GameState.States.ACTIVE_STATE)
 
 func execute(entity:Node):
 	
 	match systemState:
-		SystemState.IDLE:
+		States.IDLE:
 			if Tag.has_tag(Tag.Tags.START,entity) and GTraits.as_button_trait(entity).is_pressed():
-				systemState = SystemState.PLAYING
+				systemState = States.PLAYING
 				timer = get_tree().create_timer(Settings.get_work_length())
-		SystemState.PLAYING:
+		States.PLAYING:
 			if Tag.has_tag(Tag.Tags.PAUSE,entity) and GTraits.as_button_trait(entity).is_pressed():
-				systemState = SystemState.PAUSED
+				systemState = States.PAUSED
 				pausedTime = timer.time_left
 				
-		SystemState.PAUSED:
+		States.PAUSED:
 			if Tag.has_tag(Tag.Tags.PLAY,entity) and GTraits.as_button_trait(entity).is_pressed():
-				systemState = SystemState.PLAYING
+				systemState = States.PLAYING
 				timer = get_tree().create_timer(pausedTime)
 
-	
-	
 	if Tag.has_tag(Tag.Tags.TIMER,entity):
 		match systemState:
-			SystemState.IDLE:
+			States.IDLE:
 				entity.find_child("Minutes Label").text = str(int(Settings.get_work_length()) / 60 / 10) + str(int(Settings.get_work_length()) / 60 % 10) + ":"
 				entity.find_child("Seconds Label").text = ":" + str(int(Settings.get_work_length()) % 60 / 10) +  str(int(Settings.get_work_length()) % 60 % 10)
-			SystemState.FINISHED:
+			States.FINISHED:
 				entity.find_child("Minutes Label").text = str(int(0) / 60 / 10) + str(int(0) / 60 % 10) + ":"
 				entity.find_child("Seconds Label").text = ":" + str(int(0) % 60 / 10) +  str(int(0) % 60 % 10)
-			SystemState.PLAYING:
+			States.PLAYING:
 				entity.find_child("Minutes Label").text = str(int(timer.time_left) / 60 / 10) + str(int(timer.time_left) / 60 % 10) + ":"
 				entity.find_child("Seconds Label").text = ":" + str(int(timer.time_left) % 60 / 10) +  str(int(timer.time_left) % 60 % 10)

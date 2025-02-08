@@ -1,42 +1,87 @@
-[gd_scene load_steps=10 format=3 uid="uid://hd5ooj6le31s"]
+[gd_scene load_steps=13 format=3 uid="uid://by6mpseghbcsg"]
 
 [ext_resource type="Script" path="res://entity.gd" id="1_ad8m1"]
+[ext_resource type="Texture2D" uid="uid://bfxhxsndr0w1m" path="res://Background.png" id="1_yc2lr"]
 [ext_resource type="Script" path="res://addons/godot-traits/core/container/gtraits_container.gd" id="2_0ojmx"]
 [ext_resource type="Script" path="res://system.gd" id="2_hctg5"]
-[ext_resource type="Script" path="res://Trait.gd" id="3_014oa"]
 [ext_resource type="Script" path="res://time_system.gd" id="5_by2lo"]
 [ext_resource type="Script" path="res://tag.gd" id="6_iqmqh"]
 [ext_resource type="Script" path="res://button_trait.gd" id="6_o85bn"]
+[ext_resource type="Script" path="res://game_state.gd" id="8_qwsup"]
+[ext_resource type="Texture2D" uid="uid://mbv4eucol6gp" path="res://Tree.png" id="9_8xy4b"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0gmw2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vmw8h"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44i5u"]
+size = Vector2(512, 100)
+
 [node name="World" type="Node2D"]
 
-[node name="Entity" type="Node2D" parent="."]
-script = ExtResource("1_ad8m1")
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(256, 128)
+scale = Vector2(4, 4)
+texture = ExtResource("1_yc2lr")
 
-[node name="GTraitsContainer" type="Node" parent="Entity"]
-script = ExtResource("2_0ojmx")
+[node name="Node2D5" type="Node2D" parent="."]
+position = Vector2(244, 128)
+scale = Vector2(0.5, 0.5)
 
-[node name="Trait" type="Node" parent="Entity/GTraitsContainer"]
-script = ExtResource("3_014oa")
+[node name="Tree" type="Sprite2D" parent="Node2D5"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
+
+[node name="Node2D6" type="Node2D" parent="."]
+position = Vector2(312, 132)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree" type="Sprite2D" parent="Node2D6"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
+
+[node name="Node2D7" type="Node2D" parent="."]
+position = Vector2(116, 136)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree" type="Sprite2D" parent="Node2D7"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
+
+[node name="Node2D8" type="Node2D" parent="."]
+position = Vector2(416, 132)
+scale = Vector2(0.5, 0.5)
+
+[node name="Tree" type="Sprite2D" parent="Node2D8"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
 
 [node name="System" type="Node" parent="."]
 script = ExtResource("2_hctg5")
 
 [node name="Main Menu UI" type="CanvasLayer" parent="."]
 
-[node name="Break Time UI" type="CanvasLayer" parent="."]
+[node name="Pause Menu UI" type="CanvasLayer" parent="."]
 
-[node name="Time System" type="Node" parent="Break Time UI"]
+[node name="Inactive UI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Time System" type="Node" parent="Inactive UI"]
 script = ExtResource("5_by2lo")
 
-[node name="Start Entity" type="Node2D" parent="Break Time UI"]
+[node name="Start Entity" type="Node2D" parent="Inactive UI"]
 script = ExtResource("1_ad8m1")
 
-[node name="Button" type="Button" parent="Break Time UI/Start Entity"]
+[node name="Button" type="Button" parent="Inactive UI/Start Entity"]
 texture_filter = 1
 offset_left = 192.0
 offset_top = 88.0
@@ -48,24 +93,24 @@ text = "Start?"
 flat = true
 metadata/_edit_group_ = true
 
-[node name="GTraitsContainer" type="Node" parent="Break Time UI/Start Entity"]
+[node name="GTraitsContainer" type="Node" parent="Inactive UI/Start Entity"]
 script = ExtResource("2_0ojmx")
 
-[node name="ButtonTrait" type="Node" parent="Break Time UI/Start Entity/GTraitsContainer"]
+[node name="ButtonTrait" type="Node" parent="Inactive UI/Start Entity/GTraitsContainer"]
 script = ExtResource("6_o85bn")
 
-[node name="Tag" type="Node" parent="Break Time UI/Start Entity"]
+[node name="Tag" type="Node" parent="Inactive UI/Start Entity"]
 script = ExtResource("6_iqmqh")
 tag = 5
 
-[node name="WorkTimer Entity" type="Node2D" parent="Break Time UI"]
+[node name="WorkTimer Entity" type="Node2D" parent="Inactive UI"]
 position = Vector2(256, 104)
 script = ExtResource("1_ad8m1")
 
-[node name="GTraitsContainer" type="Node" parent="Break Time UI/WorkTimer Entity"]
+[node name="GTraitsContainer" type="Node" parent="Inactive UI/WorkTimer Entity"]
 script = ExtResource("2_0ojmx")
 
-[node name="Minutes Label" type="Label" parent="Break Time UI/WorkTimer Entity"]
+[node name="Minutes Label" type="Label" parent="Inactive UI/WorkTimer Entity"]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -83,7 +128,7 @@ text = "00:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Seconds Label" type="Label" parent="Break Time UI/WorkTimer Entity"]
+[node name="Seconds Label" type="Label" parent="Inactive UI/WorkTimer Entity"]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,15 +145,15 @@ theme_override_font_sizes/font_size = 64
 text = ":00"
 vertical_alignment = 1
 
-[node name="Tag" type="Node" parent="Break Time UI/WorkTimer Entity"]
+[node name="Tag" type="Node" parent="Inactive UI/WorkTimer Entity"]
 script = ExtResource("6_iqmqh")
 tag = 2
 
-[node name="Pause Entity" type="Node2D" parent="Break Time UI"]
+[node name="Pause Entity" type="Node2D" parent="Inactive UI"]
 position = Vector2(512, 256)
 script = ExtResource("1_ad8m1")
 
-[node name="Button" type="Button" parent="Break Time UI/Pause Entity"]
+[node name="Button" type="Button" parent="Inactive UI/Pause Entity"]
 offset_left = -96.0
 offset_top = -48.0
 offset_right = -64.0
@@ -117,31 +162,31 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_vmw8h")
 flat = true
 metadata/_edit_group_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="Break Time UI/Pause Entity/Button"]
+[node name="Polygon2D" type="Polygon2D" parent="Inactive UI/Pause Entity/Button"]
 position = Vector2(-248, -192)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(248, 192, 248, 224, 260, 224, 260, 192)
 
-[node name="Polygon2D2" type="Polygon2D" parent="Break Time UI/Pause Entity/Button"]
+[node name="Polygon2D2" type="Polygon2D" parent="Inactive UI/Pause Entity/Button"]
 position = Vector2(-216, -192)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(236, 192, 236, 224, 248, 224, 248, 192)
 
-[node name="GTraitsContainer" type="Node" parent="Break Time UI/Pause Entity"]
+[node name="GTraitsContainer" type="Node" parent="Inactive UI/Pause Entity"]
 script = ExtResource("2_0ojmx")
 
-[node name="ButtonTrait" type="Node" parent="Break Time UI/Pause Entity/GTraitsContainer"]
+[node name="ButtonTrait" type="Node" parent="Inactive UI/Pause Entity/GTraitsContainer"]
 script = ExtResource("6_o85bn")
 
-[node name="Tag" type="Node" parent="Break Time UI/Pause Entity"]
+[node name="Tag" type="Node" parent="Inactive UI/Pause Entity"]
 script = ExtResource("6_iqmqh")
 tag = 4
 
-[node name="Play Entity" type="Node2D" parent="Break Time UI"]
+[node name="Play Entity" type="Node2D" parent="Inactive UI"]
 position = Vector2(512, 256)
 script = ExtResource("1_ad8m1")
 
-[node name="Button" type="Button" parent="Break Time UI/Play Entity"]
+[node name="Button" type="Button" parent="Inactive UI/Play Entity"]
 offset_left = -48.0
 offset_top = -48.0
 offset_right = -16.0
@@ -150,21 +195,67 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_0gmw2")
 flat = true
 metadata/_edit_group_ = true
 
-[node name="Polygon2D" type="Polygon2D" parent="Break Time UI/Play Entity/Button"]
+[node name="Polygon2D" type="Polygon2D" parent="Inactive UI/Play Entity/Button"]
 position = Vector2(-248, -192)
 color = Color(0, 1, 0, 1)
 polygon = PackedVector2Array(248, 192, 248, 224, 280, 208)
 
-[node name="GTraitsContainer" type="Node" parent="Break Time UI/Play Entity"]
+[node name="GTraitsContainer" type="Node" parent="Inactive UI/Play Entity"]
 script = ExtResource("2_0ojmx")
 
-[node name="ButtonTrait" type="Node" parent="Break Time UI/Play Entity/GTraitsContainer"]
+[node name="ButtonTrait" type="Node" parent="Inactive UI/Play Entity/GTraitsContainer"]
 script = ExtResource("6_o85bn")
 
-[node name="Tag" type="Node" parent="Break Time UI/Play Entity"]
+[node name="Tag" type="Node" parent="Inactive UI/Play Entity"]
 script = ExtResource("6_iqmqh")
 tag = 3
 
-[node name="Play Time UI" type="CanvasLayer" parent="."]
+[node name="Active UI" type="CanvasLayer" parent="."]
 
-[node name="Setting UI" type="CanvasLayer" parent="."]
+[node name="Settings Menu UI" type="CanvasLayer" parent="."]
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("8_qwsup")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(64, 144)
+
+[node name="Tree" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(208, 208)
+
+[node name="Tree" type="Sprite2D" parent="Node2D2"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
+
+[node name="Node2D3" type="Node2D" parent="."]
+position = Vector2(368, 176)
+
+[node name="Tree" type="Sprite2D" parent="Node2D3"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
+
+[node name="Node2D4" type="Node2D" parent="."]
+position = Vector2(464, 192)
+
+[node name="Tree" type="Sprite2D" parent="Node2D4"]
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("9_8xy4b")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(256, 178)
+shape = SubResource("RectangleShape2D_44i5u")
