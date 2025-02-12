@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn1jqd38ohg02"
-path="res://.godot/imported/Sun.png-a95f9a833c926cd83f1045ceaeba3ab7.ctex"
+uid="uid://dtyrlu4uosh8k"
+path="res://.godot/imported/Play Button UI.png-ce924ea067864acb48a211eb71facb16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sun.png"
-dest_files=["res://.godot/imported/Sun.png-a95f9a833c926cd83f1045ceaeba3ab7.ctex"]
+source_file="res://textures/Play Button UI.png"
+dest_files=["res://.godot/imported/Play Button UI.png-ce924ea067864acb48a211eb71facb16.ctex"]
 
 [params]
 

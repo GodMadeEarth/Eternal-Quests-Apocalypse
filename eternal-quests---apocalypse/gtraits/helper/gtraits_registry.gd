@@ -15,6 +15,7 @@ extends Node
 #region Trait declaration
 
 static func _static_init() -> void:
+	GTraitsCore.register_trait(AnimationTrait, "AnimationTrait")
 	GTraitsCore.register_trait(Trait, "Trait")
 	GTraitsCore.register_trait(ButtonTrait, "ButtonTrait")
 

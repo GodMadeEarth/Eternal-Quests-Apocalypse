@@ -25,7 +25,7 @@ func execute(entity:Node):
 	
 	match systemState:
 		States.IDLE:
-			if Tag.has_tag(Tag.Tags.START,entity) and GTraits.as_button_trait(entity).is_pressed():
+			if Tag.has_tag(Tag.Tags.PLAY,entity) and GTraits.as_button_trait(entity).is_pressed():
 				systemState = States.PLAYING
 				timer = get_tree().create_timer(Settings.get_work_length())
 		States.PLAYING:

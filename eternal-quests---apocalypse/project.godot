@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GTraitsRegistry="*res://gtraits/helper/gtraits_registry.gd"
-Settings="*res://settings.gd"
-GameState="*res://game_state.gd"
+Settings="*res://global scripts/settings.gd"
+GameState="*res://global scripts/game_state.gd"
 
 [display]
 
@@ -34,3 +34,7 @@ enabled=PackedStringArray("res://addons/godot-traits/plugin.cfg")
 [global_group]
 
 Entities=""
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

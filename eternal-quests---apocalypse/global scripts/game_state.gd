@@ -1,6 +1,6 @@
 extends Node
 
-var currentState:States = States.UNKOWN
+var currentState:States = States.INACTIVE_STATE
 
 enum States{
 	UNKOWN,

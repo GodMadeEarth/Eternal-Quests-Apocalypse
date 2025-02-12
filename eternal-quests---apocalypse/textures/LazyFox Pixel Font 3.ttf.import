@@ -3,17 +3,17 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c3woy7yjp6wy"
-path="res://.godot/imported/LazyFox Pixel Font 3.ttf-a2d197df4d64089affd3706bdd296311.fontdata"
+path="res://.godot/imported/LazyFox Pixel Font 3.ttf-40c319d519d96cc50b739b21861e4b5b.fontdata"
 
 [deps]
 
-source_file="res://LazyFox Pixel Font 3.ttf"
-dest_files=["res://.godot/imported/LazyFox Pixel Font 3.ttf-a2d197df4d64089affd3706bdd296311.fontdata"]
+source_file="res://textures/LazyFox Pixel Font 3.ttf"
+dest_files=["res://.godot/imported/LazyFox Pixel Font 3.ttf-40c319d519d96cc50b739b21861e4b5b.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
@@ -21,14 +21,19 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
-subpixel_positioning=1
+hinting=0
+subpixel_positioning=2
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}

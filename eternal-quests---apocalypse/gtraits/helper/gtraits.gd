@@ -37,8 +37,56 @@ static func if_is_a_or_else(a_trait:Script, object:Object, if_callable:Callable,
 
 #endregion
 
+#region Trait AnimationTrait
+# Trait script path: 'res://trait scripts/animation_trait.gd'
+
+
+## Get [AnimationTrait] trait from the given object. Raise an assertion error if trait is not found.
+## See [method GTraits.as_a] for more details.
+static func as_animation_trait(object:Object) -> AnimationTrait:
+	return as_a(AnimationTrait, object)
+
+## Gets if the given object is a [AnimationTrait].
+## See [method GTraits.is_a] for more details.
+static func is_animation_trait(object:Object) -> bool:
+	return is_a(AnimationTrait, object)
+
+## Add trait [AnimationTrait] to the given object.
+## See [method GTraits.add_trait_to] for more details.
+static func set_animation_trait(object:Object) -> AnimationTrait:
+	return add_trait_to(AnimationTrait, object)
+
+## Remove trait [AnimationTrait] from the given object. Removed trait instance is automatically freed.
+## See [method GTraits.remove_trait_from] for more details.
+static func unset_animation_trait(object:Object) -> void:
+	remove_trait_from(AnimationTrait, object)
+
+## Calls the given [Callable] if and only if an object is a [AnimationTrait]. The callable.
+## takes the [AnimationTrait] trait as argument. Returns the callable result if the object is a
+## [AnimationTrait], [code]null[/code] otherwise.
+## [br][br]
+## If [code]deferred_call[/code] is [code]true[/code], the callable is called using [method Callable.call_deferred] and
+## the returned value will always be [code]null[/code].
+## [br][br]
+## See [method GTraits.if_is_a] for more details.
+static func if_is_animation_trait(object:Object, if_callable:Callable, deferred_call:bool = false) -> Variant:
+	return if_is_a(AnimationTrait, object, if_callable, deferred_call)
+
+## Calls the given [i]if[/i] [Callable] if and only if an object is a [AnimationTrait], or else calls
+## the given [i]else[/i] callable. The [i]if[/i] callable takes the [AnimationTrait] trait as argument, and the
+## [i]else[/i] callable does not take any argument. Returns the called callable result..
+## [br][br]
+## If [code]deferred_call[/code] is [code]true[/code], the callable is called using [method Callable.call_deferred] and
+## the returned value will always be [code]null[/code].
+## [br][br]
+## See [method GTraits.if_is_a_or_else] for more details.
+static func if_is_animation_trait_or_else(object:Object, if_callable:Callable, else_callable:Callable, deferred_call:bool = false) -> Variant:
+	return if_is_a_or_else(AnimationTrait, object, if_callable, else_callable, deferred_call)
+
+#endregion
+
 #region Trait Trait
-# Trait script path: 'res://Trait.gd'
+# Trait script path: 'res://trait scripts/base trait.gd'
 
 
 ## Get [Trait] trait from the given object. Raise an assertion error if trait is not found.
@@ -86,7 +134,7 @@ static func if_is_trait_or_else(object:Object, if_callable:Callable, else_callab
 #endregion
 
 #region Trait ButtonTrait
-# Trait script path: 'res://button_trait.gd'
+# Trait script path: 'res://trait scripts/button_trait.gd'
 
 
 ## Get [ButtonTrait] trait from the given object. Raise an assertion error if trait is not found.
