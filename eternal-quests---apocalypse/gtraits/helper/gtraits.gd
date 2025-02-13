@@ -181,3 +181,98 @@ static func if_is_button_trait_or_else(object:Object, if_callable:Callable, else
 
 #endregion
 
+#region Trait SnappedTransformTrait
+# Trait script path: 'res://trait scripts/snapped_transform_trait.gd'
+# Trait SnappedTransformTrait is configured to be accessed by alias SnappedTransformTrait
+
+## Get [SnappedTransformTrait] as trait alias [b]SnappedTransformTrait[/b] trait from the given object. Raise an assertion error if trait is not found.
+## See [method GTraits.as_a] for more details.
+static func as_snapped_transform_trait(object:Object) -> SnappedTransformTrait:
+	return as_a(SnappedTransformTrait, object)
+
+## Gets if the given object is a [SnappedTransformTrait] as trait alias [b][SnappedTransformTrait][/b].
+## See [method GTraits.is_a] for more details.
+static func is_snapped_transform_trait(object:Object) -> bool:
+	return is_a(SnappedTransformTrait, object)
+
+## Add trait [SnappedTransformTrait] as trait alias [b]SnappedTransformTrait[/b] to the given object.
+## See [method GTraits.add_trait_to] for more details.
+static func set_snapped_transform_trait(object:Object) -> SnappedTransformTrait:
+	return add_trait_to(SnappedTransformTrait, object)
+
+## Remove trait [SnappedTransformTrait] as trait alias [b]SnappedTransformTrait[/b] from the given object. Removed trait instance is automatically freed.
+## See [method GTraits.remove_trait_from] for more details.
+static func unset_snapped_transform_trait(object:Object) -> void:
+	remove_trait_from(SnappedTransformTrait, object)
+
+## Calls the given [Callable] if and only if an object is a [SnappedTransformTrait] as trait alias [b]SnappedTransformTrait[/b]. The callable.
+## takes the [SnappedTransformTrait] trait as argument. Returns the callable result if the object is a
+## [SnappedTransformTrait], [code]null[/code] otherwise.
+## [br][br]
+## If [code]deferred_call[/code] is [code]true[/code], the callable is called using [method Callable.call_deferred] and
+## the returned value will always be [code]null[/code].
+## [br][br]
+## See [method GTraits.if_is_a] for more details.
+static func if_is_snapped_transform_trait(object:Object, if_callable:Callable, deferred_call:bool = false) -> Variant:
+	return if_is_a(SnappedTransformTrait, object, if_callable, deferred_call)
+
+## Calls the given [i]if[/i] [Callable] if and only if an object is a [SnappedTransformTrait] as trait alias [b]SnappedTransformTrait[/b], or else calls
+## the given [i]else[/i] callable. The [i]if[/i] callable takes the [SnappedTransformTrait] trait as argument, and the
+## [i]else[/i] callable does not take any argument. Returns the called callable result.
+## [br][br]
+## If [code]deferred_call[/code] is [code]true[/code], the callable is called using [method Callable.call_deferred] and
+## the returned value will always be [code]null[/code].
+## [br][br]
+## See [method GTraits.if_is_a_or_else] for more details.
+static func if_is_snapped_transform_trait_or_else(object:Object, if_callable:Callable, else_callable:Callable, deferred_call:bool = false) -> Variant:
+	return if_is_a_or_else(SnappedTransformTrait, object, if_callable, else_callable, deferred_call)
+
+#endregion
+
+#region Trait TransformTrait
+# Trait script path: 'res://trait scripts/transform_trait.gd'
+
+
+## Get [TransformTrait] trait from the given object. Raise an assertion error if trait is not found.
+## See [method GTraits.as_a] for more details.
+static func as_transform_trait(object:Object) -> TransformTrait:
+	return as_a(TransformTrait, object)
+
+## Gets if the given object is a [TransformTrait].
+## See [method GTraits.is_a] for more details.
+static func is_transform_trait(object:Object) -> bool:
+	return is_a(TransformTrait, object)
+
+## Add trait [TransformTrait] to the given object.
+## See [method GTraits.add_trait_to] for more details.
+static func set_transform_trait(object:Object) -> TransformTrait:
+	return add_trait_to(TransformTrait, object)
+
+## Remove trait [TransformTrait] from the given object. Removed trait instance is automatically freed.
+## See [method GTraits.remove_trait_from] for more details.
+static func unset_transform_trait(object:Object) -> void:
+	remove_trait_from(TransformTrait, object)
+
+## Calls the given [Callable] if and only if an object is a [TransformTrait]. The callable.
+## takes the [TransformTrait] trait as argument. Returns the callable result if the object is a
+## [TransformTrait], [code]null[/code] otherwise.
+## [br][br]
+## If [code]deferred_call[/code] is [code]true[/code], the callable is called using [method Callable.call_deferred] and
+## the returned value will always be [code]null[/code].
+## [br][br]
+## See [method GTraits.if_is_a] for more details.
+static func if_is_transform_trait(object:Object, if_callable:Callable, deferred_call:bool = false) -> Variant:
+	return if_is_a(TransformTrait, object, if_callable, deferred_call)
+
+## Calls the given [i]if[/i] [Callable] if and only if an object is a [TransformTrait], or else calls
+## the given [i]else[/i] callable. The [i]if[/i] callable takes the [TransformTrait] trait as argument, and the
+## [i]else[/i] callable does not take any argument. Returns the called callable result..
+## [br][br]
+## If [code]deferred_call[/code] is [code]true[/code], the callable is called using [method Callable.call_deferred] and
+## the returned value will always be [code]null[/code].
+## [br][br]
+## See [method GTraits.if_is_a_or_else] for more details.
+static func if_is_transform_trait_or_else(object:Object, if_callable:Callable, else_callable:Callable, deferred_call:bool = false) -> Variant:
+	return if_is_a_or_else(TransformTrait, object, if_callable, else_callable, deferred_call)
+
+#endregion

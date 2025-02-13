@@ -18,6 +18,8 @@ static func _static_init() -> void:
 	GTraitsCore.register_trait(AnimationTrait, "AnimationTrait")
 	GTraitsCore.register_trait(Trait, "Trait")
 	GTraitsCore.register_trait(ButtonTrait, "ButtonTrait")
+	GTraitsCore.register_trait(SnappedTransformTrait, "SnappedTransformTrait")
+	GTraitsCore.register_trait(TransformTrait, "TransformTrait")
 
 #endregion
 

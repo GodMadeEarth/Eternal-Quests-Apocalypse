@@ -1,18 +1,17 @@
 class_name AnimationMapper
 
-
-static func animation_started(node:Node)-> Signal:
-	if node is AnimatedSprite2D:
+static func animation_started(node:Node, name: StringName = &"")-> Signal:
+	if node is AnimatedSprite2D and can_play_animation(node,name):
 		return node.animation_changed
-	elif node is AnimationPlayer:
+	elif node is AnimationPlayer and can_play_animation(node,name):
 		return node.animation_changed
 	
 	return node.tree_exited
 
-static func animation_finished(node:Node)-> Signal:
-	if node is AnimatedSprite2D:
+static func animation_finished(node:Node, name:StringName = &"")-> Signal:
+	if node is AnimatedSprite2D and can_play_animation(node,name):
 		return node.animation_finished
-	elif node is AnimationPlayer:
+	elif node is AnimationPlayer and can_play_animation(node,name):
 		return node.animation_finished
 	
 	return node.tree_exited
@@ -33,6 +32,14 @@ static func get_animation_playing_speed(node:Node ,name: StringName = &"")-> flo
 	
 	return 0.0
 
+static func can_animate(node:Node)-> bool:
+	if node is AnimatedSprite2D:
+		return true
+	elif node is AnimationPlayer:
+		return true
+	
+	return false
+
 static func can_play_animation(node:Node, name: StringName = &"")-> bool:
 	if node is AnimatedSprite2D:
 		return node.sprite_frames.has_animation(name)
@@ -43,9 +50,9 @@ static func can_play_animation(node:Node, name: StringName = &"")-> bool:
 
 static func is_playing_animation(node:Node, name: StringName = &"")-> bool:
 	if node is AnimatedSprite2D:
-		return node.animation == name
+		return node.animation == name and node.is_playing()
 	elif node is AnimationPlayer:
-		return node.current_animation == name
+		return node.current_animation == name and node.is_playing()
 	
 	return false
 

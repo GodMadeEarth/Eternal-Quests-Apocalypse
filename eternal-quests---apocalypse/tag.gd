@@ -9,7 +9,8 @@ enum Tags{
 	TIMER,
 	PLAY,
 	PAUSE,
-	START
+	START,
+	PLAYER
 }
 
 static func has_tag(tag:Tags,object:Node):

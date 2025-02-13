@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://by6mpseghbcsg"]
+[gd_scene load_steps=19 format=3 uid="uid://by6mpseghbcsg"]
 
+[ext_resource type="Script" path="res://system scripts/player_input_system.gd" id="1_4f6ea"]
 [ext_resource type="Script" path="res://entity.gd" id="1_ad8m1"]
 [ext_resource type="Script" path="res://addons/godot-traits/core/container/gtraits_container.gd" id="2_0ojmx"]
-[ext_resource type="Script" path="res://system scripts/system.gd" id="2_hctg5"]
 [ext_resource type="Script" path="res://system scripts/inactive_time_system.gd" id="3_54ai7"]
 [ext_resource type="Script" path="res://tag.gd" id="6_iqmqh"]
 [ext_resource type="Script" path="res://trait scripts/button_trait.gd" id="6_o85bn"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bg67xsm5t188p" path="res://textures/Ground.png" id="11_fykdj"]
 [ext_resource type="SpriteFrames" uid="uid://bd34gbhey6i6b" path="res://prototype_character_spriteframes.tres" id="14_ghah2"]
 [ext_resource type="Script" path="res://trait scripts/animation_trait.gd" id="15_lixif"]
+[ext_resource type="Script" path="res://trait scripts/snapped_transform_trait.gd" id="17_nxkih"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0gmw2"]
 
@@ -22,8 +23,8 @@
 
 [node name="World" type="Node2D"]
 
-[node name="System" type="Node" parent="."]
-script = ExtResource("2_hctg5")
+[node name="PlayerInputSystem" type="Node" parent="."]
+script = ExtResource("1_4f6ea")
 
 [node name="Main Menu UI" type="CanvasLayer" parent="."]
 visible = false
@@ -222,8 +223,8 @@ script = ExtResource("1_ad8m1")
 position = Vector2(256, 180)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("14_ghah2")
-animation = &"on_idle_down"
-autoplay = "on_idle_down"
+animation = &"on_idle"
+autoplay = "on_idle"
 offset = Vector2(0, -7)
 
 [node name="GTraitsContainer" type="Node" parent="Entity"]
@@ -231,3 +232,11 @@ script = ExtResource("2_0ojmx")
 
 [node name="AnimationTrait" type="Node" parent="Entity/GTraitsContainer"]
 script = ExtResource("15_lixif")
+
+[node name="SnappedTransformTrait" type="Node" parent="Entity/GTraitsContainer"]
+script = ExtResource("17_nxkih")
+_snapValue = 2.0
+
+[node name="Tag" type="Node" parent="Entity"]
+script = ExtResource("6_iqmqh")
+tag = 6

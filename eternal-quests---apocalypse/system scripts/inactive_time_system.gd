@@ -16,12 +16,12 @@ func _physics_process(delta: float) -> void:
 	if not GameState.is_current_state(GameState.States.INACTIVE_STATE): return
 	
 	for entity in query():
-		execute(entity)
+		execute(entity,delta)
 	
 	if systemState == States.FINISHED:
 		GameState.set_current_state(GameState.States.ACTIVE_STATE)
 
-func execute(entity:Node):
+func execute(entity:Node,delta:float):
 	
 	match systemState:
 		States.IDLE:

@@ -8,7 +8,7 @@ func query()->Array[Entity]:
 
 func _physics_process(delta: float) -> void:
 	for entity in query():
-		execute(entity)
+		execute(entity,delta)
 
-func execute(entity:Node):
+func execute(entity:Node,delta:float):
 	pass
