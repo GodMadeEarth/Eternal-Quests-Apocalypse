@@ -8,12 +8,12 @@
 [ext_resource type="Script" path="res://trait scripts/button_trait.gd" id="6_o85bn"]
 [ext_resource type="FontFile" uid="uid://c3woy7yjp6wy" path="res://textures/LazyFox Pixel Font 3.ttf" id="7_jn8cg"]
 [ext_resource type="Texture2D" uid="uid://dqdgdu1u11rrf" path="res://textures/Pause Button UI.png" id="8_pa22t"]
-[ext_resource type="Script" path="res://global scripts/game_state.gd" id="8_qwsup"]
 [ext_resource type="Texture2D" uid="uid://dtyrlu4uosh8k" path="res://textures/Play Button UI.png" id="9_13a55"]
 [ext_resource type="Texture2D" uid="uid://bibujj7m832a5" path="res://textures/Sky.png" id="9_ibuij"]
 [ext_resource type="Texture2D" uid="uid://dn1jqd38ohg02" path="res://textures/Sun.png" id="10_n5v8p"]
 [ext_resource type="Texture2D" uid="uid://bg67xsm5t188p" path="res://textures/Ground.png" id="11_fykdj"]
 [ext_resource type="SpriteFrames" uid="uid://bd34gbhey6i6b" path="res://prototype_character_spriteframes.tres" id="14_ghah2"]
+[ext_resource type="Script" path="res://suffix_prefix_animator.gd" id="15_86n02"]
 [ext_resource type="Script" path="res://trait scripts/animation_trait.gd" id="15_lixif"]
 [ext_resource type="Script" path="res://trait scripts/snapped_transform_trait.gd" id="17_nxkih"]
 
@@ -192,9 +192,6 @@ theme_override_fonts/font = ExtResource("7_jn8cg")
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 
-[node name="GameState" type="Node" parent="."]
-script = ExtResource("8_qwsup")
-
 [node name="Sky" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(256, 128)
@@ -223,9 +220,12 @@ script = ExtResource("1_ad8m1")
 position = Vector2(256, 180)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("14_ghah2")
-animation = &"on_idle"
-autoplay = "on_idle"
+animation = &"on_idle_on_right"
+autoplay = "on_idle_on_down"
 offset = Vector2(0, -7)
+
+[node name="SuffixPrefixAnimator" type="Node" parent="Entity/AnimatedSprite2D"]
+script = ExtResource("15_86n02")
 
 [node name="GTraitsContainer" type="Node" parent="Entity"]
 script = ExtResource("2_0ojmx")
@@ -235,7 +235,6 @@ script = ExtResource("15_lixif")
 
 [node name="SnappedTransformTrait" type="Node" parent="Entity/GTraitsContainer"]
 script = ExtResource("17_nxkih")
-_snapValue = 2.0
 
 [node name="Tag" type="Node" parent="Entity"]
 script = ExtResource("6_iqmqh")

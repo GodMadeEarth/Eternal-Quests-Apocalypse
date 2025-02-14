@@ -9,10 +9,12 @@ var animators:Array[Node]
 func _initialize(_receiver) -> void:
 	receiver = _receiver
 	
-	for animator in receiver.get_children():
-		if AnimationMapper.can_animate(animator):
-			animators.append(animator)
+	animators.append_array(receiver.find_children("","AnimatedSprite2D"))
+	animators.append_array(receiver.find_children("","AnimationPlayer"))
+	animators.append_array(receiver.find_children("","CustomAnimator"))
 	
+	print(animators)
+
 
 
 signal animation_started(name: StringName)

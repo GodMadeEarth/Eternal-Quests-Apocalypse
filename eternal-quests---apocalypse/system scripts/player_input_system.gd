@@ -12,11 +12,25 @@ func execute(entity:Node,delta:float):
 	inputVect.y = int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W)) 
 	inputVect = inputVect.normalized()
 	
+	
 	var moveVect := inputVect * delta * 100
 	
 	GTraits.as_transform_trait(entity).add_position(moveVect)
+	
+	
+	
+	
 	
 	if inputVect.is_zero_approx():
 		GTraits.as_animation_trait(entity).play_animation("on_idle")
 	else:
 		GTraits.as_animation_trait(entity).play_animation("on_walk")
+		
+		if inputVect.x > 0:
+			GTraits.as_animation_trait(entity).play_animation("on_right")
+		elif inputVect.x < 0:
+			GTraits.as_animation_trait(entity).play_animation("on_left")
+		elif inputVect.y < 0:
+			GTraits.as_animation_trait(entity).play_animation("on_up")
+		else:
+			GTraits.as_animation_trait(entity).play_animation("on_down")

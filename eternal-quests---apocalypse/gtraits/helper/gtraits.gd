@@ -276,3 +276,4 @@ static func if_is_transform_trait_or_else(object:Object, if_callable:Callable, e
 	return if_is_a_or_else(TransformTrait, object, if_callable, else_callable, deferred_call)
 
 #endregion
+

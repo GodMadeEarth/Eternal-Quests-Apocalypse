@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 GTraitsRegistry="*res://gtraits/helper/gtraits_registry.gd"
 Settings="*res://global scripts/settings.gd"
 GameState="*res://global scripts/game_state.gd"
+PlayerState="*res://global scripts/player_state.gd"
 
 [display]
 
