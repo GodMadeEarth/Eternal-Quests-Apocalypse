@@ -1,25 +1,29 @@
-[gd_scene load_steps=16 format=3 uid="uid://by6mpseghbcsg"]
+[gd_scene load_steps=19 format=3 uid="uid://by6mpseghbcsg"]
 
-[ext_resource type="Script" path="res://system scripts/player_input_system.gd" id="1_4f6ea"]
 [ext_resource type="Script" path="res://entity.gd" id="1_ad8m1"]
 [ext_resource type="Script" path="res://addons/godot-traits/core/container/gtraits_container.gd" id="2_0ojmx"]
-[ext_resource type="Script" path="res://system scripts/time_left_system.gd" id="3_54ai7"]
-[ext_resource type="Script" path="res://system scripts/pause_system.gd" id="4_v468t"]
+[ext_resource type="Script" path="res://system scripts/inactive_time_system.gd" id="3_54ai7"]
 [ext_resource type="Script" path="res://tag.gd" id="6_iqmqh"]
+[ext_resource type="Script" path="res://trait scripts/button_trait.gd" id="6_o85bn"]
 [ext_resource type="FontFile" uid="uid://c3woy7yjp6wy" path="res://textures/LazyFox Pixel Font 3.ttf" id="7_jn8cg"]
+[ext_resource type="Texture2D" uid="uid://dqdgdu1u11rrf" path="res://textures/Pause Button UI.png" id="8_pa22t"]
+[ext_resource type="Texture2D" uid="uid://dtyrlu4uosh8k" path="res://textures/Play Button UI.png" id="9_13a55"]
 [ext_resource type="Texture2D" uid="uid://bibujj7m832a5" path="res://textures/Sky.png" id="9_ibuij"]
 [ext_resource type="Texture2D" uid="uid://dn1jqd38ohg02" path="res://textures/Sun.png" id="10_n5v8p"]
 [ext_resource type="Texture2D" uid="uid://bg67xsm5t188p" path="res://textures/Ground.png" id="11_fykdj"]
 [ext_resource type="SpriteFrames" uid="uid://bd34gbhey6i6b" path="res://prototype_character_spriteframes.tres" id="14_ghah2"]
 [ext_resource type="Script" path="res://suffix_prefix_animator.gd" id="15_86n02"]
 [ext_resource type="Script" path="res://trait scripts/animation_trait.gd" id="15_lixif"]
-[ext_resource type="Script" path="res://system scripts/player_inactive_walk_system.gd" id="17_3npwa"]
+[ext_resource type="Script" path="res://player_inactive_walk_system.gd" id="17_3npwa"]
 [ext_resource type="Script" path="res://trait scripts/snapped_transform_trait.gd" id="17_nxkih"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0gmw2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vmw8h"]
 
 [node name="World" type="Node2D"]
 
 [node name="PlayerInputSystem" type="Node" parent="."]
-script = ExtResource("1_4f6ea")
 
 [node name="PlayerInactiveWalkSystem" type="Node" parent="."]
 script = ExtResource("17_3npwa")
@@ -56,9 +60,7 @@ theme_override_font_sizes/font_size = 32
 text = "Apocalypse!"
 
 [node name="Pause Menu UI" type="CanvasLayer" parent="."]
-
-[node name="PauseSystem" type="Node" parent="Pause Menu UI"]
-script = ExtResource("4_v468t")
+visible = false
 
 [node name="Label" type="Label" parent="Pause Menu UI"]
 offset_left = 196.0
@@ -69,19 +71,19 @@ theme_override_font_sizes/font_size = 32
 text = "Paused"
 vertical_alignment = 1
 
-[node name="Time Left UI" type="CanvasLayer" parent="."]
+[node name="Inactive UI" type="CanvasLayer" parent="."]
 
-[node name="Time Left System" type="Node" parent="Time Left UI"]
+[node name="Inactive Time System" type="Node" parent="Inactive UI"]
 script = ExtResource("3_54ai7")
 
-[node name="WorkTimer Entity" type="Node2D" parent="Time Left UI"]
+[node name="WorkTimer Entity" type="Node2D" parent="Inactive UI"]
 position = Vector2(256, 128)
 script = ExtResource("1_ad8m1")
 
-[node name="GTraitsContainer" type="Node" parent="Time Left UI/WorkTimer Entity"]
+[node name="GTraitsContainer" type="Node" parent="Inactive UI/WorkTimer Entity"]
 script = ExtResource("2_0ojmx")
 
-[node name="Minutes Label" type="Label" parent="Time Left UI/WorkTimer Entity"]
+[node name="Minutes Label" type="Label" parent="Inactive UI/WorkTimer Entity"]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,7 +103,7 @@ text = "00:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Seconds Label" type="Label" parent="Time Left UI/WorkTimer Entity"]
+[node name="Seconds Label" type="Label" parent="Inactive UI/WorkTimer Entity"]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -120,11 +122,64 @@ theme_override_font_sizes/font_size = 64
 text = ":00"
 vertical_alignment = 1
 
-[node name="Tag" type="Node" parent="Time Left UI/WorkTimer Entity"]
+[node name="Tag" type="Node" parent="Inactive UI/WorkTimer Entity"]
 script = ExtResource("6_iqmqh")
 tag = 2
 
-[node name="Inactive UI" type="CanvasLayer" parent="."]
+[node name="Play Entity" type="Node2D" parent="Inactive UI"]
+position = Vector2(256, 128)
+script = ExtResource("1_ad8m1")
+
+[node name="PlayButtonUi" type="Sprite2D" parent="Inactive UI/Play Entity"]
+scale = Vector2(4, 4)
+texture = ExtResource("9_13a55")
+
+[node name="Button" type="Button" parent="Inactive UI/Play Entity"]
+offset_left = 220.0
+offset_top = -112.0
+offset_right = 240.0
+offset_bottom = -88.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0gmw2")
+flat = true
+metadata/_edit_group_ = true
+
+[node name="GTraitsContainer" type="Node" parent="Inactive UI/Play Entity"]
+script = ExtResource("2_0ojmx")
+
+[node name="ButtonTrait" type="Node" parent="Inactive UI/Play Entity/GTraitsContainer"]
+script = ExtResource("6_o85bn")
+
+[node name="Tag" type="Node" parent="Inactive UI/Play Entity"]
+script = ExtResource("6_iqmqh")
+tag = 3
+
+[node name="Pause Entity" type="Node2D" parent="Inactive UI"]
+position = Vector2(512, 256)
+script = ExtResource("1_ad8m1")
+
+[node name="PauseButtonUi" type="Sprite2D" parent="Inactive UI/Pause Entity"]
+position = Vector2(-256, -128)
+scale = Vector2(4, 4)
+texture = ExtResource("8_pa22t")
+
+[node name="Button" type="Button" parent="Inactive UI/Pause Entity"]
+offset_left = -72.0
+offset_top = -240.0
+offset_right = -44.0
+offset_bottom = -216.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vmw8h")
+flat = true
+metadata/_edit_group_ = true
+
+[node name="GTraitsContainer" type="Node" parent="Inactive UI/Pause Entity"]
+script = ExtResource("2_0ojmx")
+
+[node name="ButtonTrait" type="Node" parent="Inactive UI/Pause Entity/GTraitsContainer"]
+script = ExtResource("6_o85bn")
+
+[node name="Tag" type="Node" parent="Inactive UI/Pause Entity"]
+script = ExtResource("6_iqmqh")
+tag = 4
 
 [node name="Active UI" type="CanvasLayer" parent="."]
 

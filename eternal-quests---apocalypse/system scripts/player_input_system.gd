@@ -1,9 +1,10 @@
 extends System
 
 func _physics_process(delta: float) -> void:
-	for entity in query():
-		if Tag.has_tag(Tag.Tags.PLAYER,entity):
-			execute(entity,delta)
+	if GameState.is_current_state(GameState.States.ACTIVE_STATE):
+		for entity in query():
+			if Tag.has_tag(Tag.Tags.PLAYER,entity):
+				execute(entity,delta)
 
 func execute(entity:Node,delta:float):
 	
@@ -19,7 +20,7 @@ func execute(entity:Node,delta:float):
 	
 	
 	
-	
+		 
 	
 	if inputVect.is_zero_approx():
 		GTraits.as_animation_trait(entity).play_animation("on_idle")

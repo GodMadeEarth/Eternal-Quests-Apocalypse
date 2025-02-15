@@ -1,6 +1,6 @@
 extends Node
 
-var currentState:States = States.IDLE
+var currentState:States = States.WALKING
 
 enum States{
 	IDLE,
